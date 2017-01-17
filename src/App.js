@@ -10,6 +10,9 @@ import Dashboard from './components/Dashboard/Dashboard';
 import Decks from './containers/Decks/Decks';
 import { loadDecks } from './redux/reducers/decks';
 import muiTheme from './muiTheme';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+
+injectTapEventPlugin();
 
 export default () => (
   <MuiThemeProvider muiTheme={muiTheme}>

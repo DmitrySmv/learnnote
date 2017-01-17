@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import RaisedButton from 'material-ui/RaisedButton';
-import Paper from 'material-ui/Paper';
 import { openCreateDeckDialog } from '../../redux/reducers/dialogs';
 import CreateDeckDialog from '../../containers/CreateDeckDialog/CreateDeckDialog';
 import { LOADING } from '../../redux/statuses';
 import CircularProgress from 'material-ui/CircularProgress';
-
-const paperStyle = {
-  width: '100%'
-};
+import Deck from '../../components/Deck/Deck';
+import Grid from '../../components/Grid/Grid';
 
 const createDeckButtonStyle = {
   marginTop: 26
@@ -23,7 +20,6 @@ class Decks extends Component {
   render() {
     const {decks, params: {subjectId}, load} = this.props;
 
-
     return (<div>
       <div className='row'>
         <h1 className='float-left'>Decks</h1>
@@ -35,9 +31,9 @@ class Decks extends Component {
             <CircularProgress size={180} thickness={20} className='float-right' />
           </div>
         </div>
-        : decks.map(deck => <Paper style={paperStyle} zDepth={1} key={deck.id}>
-          <h3 style={{padding: '15px'}}>{deck.name}</h3>
-        </Paper>)
+        : <Grid columnsCount={3}>
+            {decks.map(deck => (<Deck deck={deck} key={deck.id}/>))}
+          </Grid>
       }
       <CreateDeckDialog subjectId={subjectId}/>
     </div>);
