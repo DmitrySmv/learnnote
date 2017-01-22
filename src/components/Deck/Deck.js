@@ -7,16 +7,19 @@ import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import IconButton from 'material-ui/IconButton';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
+import LinearProgress from 'material-ui/LinearProgress';
 
 const Deck = ({ deck }) => (
   <Card style={{marginBottom: '1.5rem'}}>
     <div className='row'>
-      <CardTitle title={deck.name} style={{fontSize: '0.1rem'}} className='large-9 columns'/>
-      <IconMenu iconButtonElement={<IconButton><MoreVertIcon /></IconButton>} className='large-3 columns' style={{marginTop: '0.75rem'}}>
+      <div className='large-9 columns'>
+        <LinearProgress mode="determinate" value={30} style={{marginTop: '1.36rem'}} />
+      </div>
+      <IconMenu iconButtonElement={<IconButton><MoreVertIcon /></IconButton>} className='large-3 columns'>
         <MenuItem primaryText='Delete deck' leftIcon={<ActionDelete />} />
       </IconMenu>
     </div>
-    <CardMedia>
+    <CardMedia overlay={<CardTitle title={deck.name} />}>
       <img src={wireframe} role='presentation' />
     </CardMedia>
     <CardActions>
