@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import RaisedButton from 'material-ui/RaisedButton';
 import { openCreateDeckDialog } from '../../redux/reducers/dialogs';
+import { deleteDeck } from '../../redux/reducers/decks';
 import CreateDeckDialog from '../../containers/CreateDeckDialog/CreateDeckDialog';
 import { LOADING } from '../../redux/statuses';
 import CircularProgress from 'material-ui/CircularProgress';
@@ -18,7 +19,7 @@ class Decks extends Component {
   };
 
   render() {
-    const {decks, params: {subjectId}, load} = this.props;
+    const {decks, params: {subjectId}, load, dispatch} = this.props;
 
     return (<div>
       <div className='row'>
@@ -32,7 +33,7 @@ class Decks extends Component {
           </div>
         </div>
         : <Grid columnsCount={3}>
-            {decks.map(deck => (<Deck deck={deck} key={deck.id}/>))}
+            {decks.map(deck => (<Deck deck={deck} key={deck.id} onDelete={() => dispatch(deleteDeck(deck))}/>))}
           </Grid>
       }
       <CreateDeckDialog subjectId={subjectId}/>

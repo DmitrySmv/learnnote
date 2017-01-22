@@ -42,6 +42,11 @@ class DropboxService {
     return this._createObject(deck, `/subjects/${deck.subjectId}/decks`);
   }
 
+  deleteDeck(deck) {
+    const path = `/subjects/${deck.subjectId}/decks/${deck.id}.json`;
+    return this._dropbox.filesDelete({path});
+  }
+
   _get(path) {
     return this._dropbox.filesListFolder({path})
       .then(response => {

@@ -9,14 +9,14 @@ import IconButton from 'material-ui/IconButton';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import LinearProgress from 'material-ui/LinearProgress';
 
-const Deck = ({ deck }) => (
+const Deck = ({ deck, onDelete }) => (
   <Card style={{marginBottom: '1.5rem'}}>
     <div className='row'>
       <div className='large-9 columns'>
         <LinearProgress mode="determinate" value={30} style={{marginTop: '1.36rem'}} />
       </div>
       <IconMenu iconButtonElement={<IconButton><MoreVertIcon /></IconButton>} className='large-3 columns'>
-        <MenuItem primaryText='Delete deck' leftIcon={<ActionDelete />} />
+        <MenuItem primaryText='Delete deck' leftIcon={<ActionDelete />} onTouchTap={onDelete}/>
       </IconMenu>
     </div>
     <CardMedia overlay={<CardTitle title={deck.name} />}>
