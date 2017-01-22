@@ -17,7 +17,7 @@ const Deck = ({ deck }) => (
       </IconMenu>
     </div>
     <CardMedia>
-      <img src={wireframe} />
+      <img src={wireframe} role='presentation' />
     </CardMedia>
     <CardActions>
       <RaisedButton label='Learn' primary={true} fullWidth={true} />
