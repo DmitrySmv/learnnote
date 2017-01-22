@@ -38,6 +38,16 @@ class DropboxService {
     return this._createObject(subject, '/subjects');
   }
 
+  deleteSubject(subject) {
+    const paths = [
+      `/subjects/${subject.id}.json`,
+      `/subjects/${subject.id}`
+    ];
+    const promises = paths.map(path => this._dropbox.filesDelete({path}));
+
+    return Promise.all(promises);
+  }
+
   createDeck(deck) {
     return this._createObject(deck, `/subjects/${deck.subjectId}/decks`);
   }

@@ -6,6 +6,7 @@ import Divider from 'material-ui/Divider';
 import RaisedButton from 'material-ui/RaisedButton';
 import CreateSubjectDialog from '../CreateSubjectDialog/CreateSubjectDialog';
 import { openCreateSubjectDialog } from '../../redux/reducers/dialogs';
+import { deleteSubject } from '../../redux/reducers/subjects';
 import { LOADING } from '../../redux/statuses';
 import CircularProgress from 'material-ui/CircularProgress';
 import Subject from '../../components/Subject/Subject';
@@ -24,11 +25,18 @@ class Sidebar extends Component {
   };
 
   render() {
-    const {subjects, load, location} = this.props;
+    const {subjects, load, location, dispatch} = this.props;
     return (
       <List>
         <Subheader>SUBJECTS</Subheader>
-        {subjects.map(subject => <Subject subject={subject} location={location}/>)}
+        {subjects.map(subject =>
+          <Subject
+            subject={subject}
+            location={location}
+            onDelete={() => dispatch(deleteSubject(subject))}
+            key={subject.id}
+          />
+        )}
         {load && <CircularProgress style={progressStyle} />}
         <Divider />
         <RaisedButton

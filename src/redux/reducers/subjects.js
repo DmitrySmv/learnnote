@@ -7,6 +7,7 @@ import uuid from 'uuid';
 const SET_SUBJECTS = 'SET_SUBJECTS';
 const LOAD_SUBJECTS = 'LOAD_SUBJECTS';
 const ADD_SUBJECT = 'ADD_SUBJECT';
+const DELETE_SUBJECT = 'DELETE_SUBJECT';
 const SET_SUBJECTS_STATUS = 'SET_SUBJECTS_STATUS';
 
 export default combineReducers({
@@ -33,6 +34,8 @@ function subjectsReducer(state = [], action) {
       return action.payload;
     case ADD_SUBJECT:
       return [...state, action.payload];
+    case DELETE_SUBJECT:
+      return state.filter(subject => subject.id !== action.payload);
     case LOAD_SUBJECTS:
       return [];
     default:
@@ -71,6 +74,16 @@ export function createSubject(subject) {
 
     return service.createSubject(subject)
       .then(() => dispatch(setSnackbar(`Subject '${subject.name}' created`)))
+      .catch(err => dispatch(setSnackbar(err)));
+  };
+}
+
+export function deleteSubject(subject) {
+  return (dispatch, getState, service) => {
+    dispatch({type: DELETE_SUBJECT, payload: subject.id});
+
+    return service.deleteSubject(subject)
+      .then(response => dispatch(setSnackbar(`Subject '${subject.name}' deleted`)))
       .catch(err => dispatch(setSnackbar(err)));
   };
 }
