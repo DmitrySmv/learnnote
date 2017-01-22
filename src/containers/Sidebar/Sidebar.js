@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {List, ListItem} from 'material-ui/List';
+import {List} from 'material-ui/List';
 import Subheader from 'material-ui/Subheader';
 import Divider from 'material-ui/Divider';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -8,8 +8,7 @@ import CreateSubjectDialog from '../CreateSubjectDialog/CreateSubjectDialog';
 import { openCreateSubjectDialog } from '../../redux/reducers/dialogs';
 import { LOADING } from '../../redux/statuses';
 import CircularProgress from 'material-ui/CircularProgress';
-import { Link } from 'react-router';
-import {grey400} from 'material-ui/styles/colors';
+import Subject from '../../components/Subject/Subject';
 
 const progressStyle = {
   marginLeft: 15
@@ -18,10 +17,6 @@ const progressStyle = {
 const buttonStyle = {
   marginTop: 15,
 }
-
-const activeStyle = {
-  backgroundColor: grey400
-};
 
 class Sidebar extends Component {
   openDialog = () => {
@@ -33,12 +28,7 @@ class Sidebar extends Component {
     return (
       <List>
         <Subheader>SUBJECTS</Subheader>
-        {subjects.map(subject => {
-          const linkTo = `/dashboard/subjects/${subject.id}`;
-          const SubjectLink = <Link to={linkTo} />;
-          const style = linkTo === location ? activeStyle : null;
-          return <ListItem primaryText={subject.name} key={subject.id} containerElement={SubjectLink} style={style} />;
-        })}
+        {subjects.map(subject => <Subject subject={subject} location={location}/>)}
         {load && <CircularProgress style={progressStyle} />}
         <Divider />
         <RaisedButton
