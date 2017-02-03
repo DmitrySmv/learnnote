@@ -43,7 +43,16 @@ class DropboxService {
       `/subjects/${subject.id}.json`,
       `/subjects/${subject.id}`
     ];
-    const promises = paths.map(path => this._dropbox.filesDelete({path}));
+    const promises = paths.map(path => {
+      return this._dropbox
+        .filesDelete({path})
+        .catch(err => {
+          if (err.status === 409) {
+            return;
+          }
+          return err;
+        });
+    });
 
     return Promise.all(promises);
   }
