@@ -1,3 +1,5 @@
+import isObject from 'lodash.isobject';
+
 // action types
 const SET_SNACKBAR = 'SET_SNACKBAR';
 const CLEAR_SNACKBAR = 'CLEAR_SNACKBAR';
@@ -20,6 +22,10 @@ export default function reducer(state = initialState, action) {
 // action creators
 export function setSnackbar(message, autoHideDuration = 4000) {
   return (dispatch) => {
+    if (isObject(message)) {
+      message = JSON.stringify(message);
+    }
+
     const action = {type: SET_SNACKBAR, payload: {message, autoHideDuration}};
 
     dispatch(action);
