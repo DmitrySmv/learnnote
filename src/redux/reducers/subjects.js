@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import { push } from 'react-router-redux';
 import { setSnackbar } from './snackbar';
 import { LOADING, LOADED } from '../statuses';
 import uuid from 'uuid';
@@ -73,6 +74,7 @@ export function createSubject(subject) {
     dispatch(addSubject(subject));
 
     return service.createSubject(subject)
+      .then(() => dispatch(push(`/dashboard/subjects/${subject.id}`)))
       .then(() => dispatch(setSnackbar(`Subject '${subject.name}' created`)))
       .catch(err => dispatch(setSnackbar(err)));
   };
