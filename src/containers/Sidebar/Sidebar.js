@@ -16,20 +16,8 @@ const buttonStyle = {
 }
 
 class Sidebar extends Component {
-  openDialog = () => {
-    this.props.dispatch(openCreateSubjectDialog());
-  }
-
-  closeDialog = () => {
-    this.props.dispatch(closeCreateSubjectDialog());
-  }
-
-  createSubject = (name) => {
-    this.props.dispatch(createSubject({name}));
-  }
-
   render() {
-    const {subjects, load, location, dispatch, openDialog} = this.props;
+    const {subjects, load, location, dispatch, isDialogOpened} = this.props;
     return (
       <List>
         <Subheader>SUBJECTS</Subheader>
@@ -50,9 +38,21 @@ class Sidebar extends Component {
           onClick={this.openDialog}
           primary={true}
         />
-        <CreateSubjectDialog open={openDialog} onClose={this.closeDialog} onCreate={this.createSubject} />
+        <CreateSubjectDialog open={isDialogOpened} onClose={this.closeDialog} onCreate={this.createSubject} />
       </List>
     );
+  }
+
+  openDialog = () => {
+    this.props.dispatch(openCreateSubjectDialog());
+  }
+
+  closeDialog = () => {
+    this.props.dispatch(closeCreateSubjectDialog());
+  }
+
+  createSubject = (name) => {
+    this.props.dispatch(createSubject({name}));
   }
 }
 
@@ -60,8 +60,9 @@ function mapStateToProps(state) {
   const {subjects, dialogs: {createSubject}} = state;
 
   return {
-    subjects: subjects.items, load: subjects.status === LOADING,
-    openDialog: createSubject.open
+    subjects: subjects.items, 
+    load: subjects.status === LOADING,
+    isDialogOpened: createSubject.open
   };
 }
 
