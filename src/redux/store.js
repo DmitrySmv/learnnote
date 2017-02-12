@@ -37,10 +37,6 @@ if (service) {
     });
 }
 
-store.subscribe(() => {
-  console.log(store.getState());
-});
-
 export const history = syncHistoryWithStore(browserHistory, store);
 
 function getDropboxService() {

@@ -1,8 +1,7 @@
 import './App.css';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import AppBar from 'material-ui/AppBar';
-import Snackbar from 'material-ui/Snackbar';
+import { AppBar, Snackbar } from 'material-ui';
 
 class App extends Component {
   render() {

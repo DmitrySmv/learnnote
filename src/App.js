@@ -1,16 +1,16 @@
 import React from 'react';
+import injectTapEventPlugin from 'react-tap-event-plugin';
 import { Provider } from 'react-redux';
 import { Router, Route, IndexRedirect, browserHistory } from 'react-router';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import store, { history } from './redux/store';
-import Dropbox from './redux/services/Dropbox';
-import App from './containers/App/App';
-import LoginPage from './components/LoginPage/LoginPage';
-import Dashboard from './components/Dashboard/Dashboard';
-import Decks from './containers/Decks/Decks';
 import { loadDecks } from './redux/reducers/decks';
+import Dropbox from './redux/services/Dropbox';
+import LoginPage from './components/LoginPage';
+import Dashboard from './components/Dashboard';
+import App from './containers/App';
+import Decks from './containers/Decks';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import muiTheme from './muiTheme';
-import injectTapEventPlugin from 'react-tap-event-plugin';
 
 injectTapEventPlugin();
 

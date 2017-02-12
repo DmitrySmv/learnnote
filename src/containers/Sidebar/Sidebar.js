@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {RaisedButton, CircularProgress, Divider, Subheader, List} from 'material-ui';
-import Subject from '../../components/Subject/Subject';
-import CreateSubjectDialog from '../../components/CreateSubjectDialog/CreateSubjectDialog';
+import { RaisedButton, CircularProgress, Divider, Subheader, List } from 'material-ui';
 import { openCreateSubjectDialog, closeCreateSubjectDialog } from '../../redux/reducers/dialogs';
 import { deleteSubject, createSubject } from '../../redux/reducers/subjects';
 import { LOADING } from '../../redux/statuses';
+import Subject from '../../components/Subject';
+import CreateSubjectDialog from '../../components/CreateSubjectDialog';
 
-const progressStyle = {
-  marginLeft: 15
-};
-
-const buttonStyle = {
-  marginTop: 15,
+const styles = {
+  progress: {
+    marginLeft: 15
+  },
+  button: {
+    marginTop: 15
+  }
 }
 
 class Sidebar extends Component {
@@ -29,11 +30,11 @@ class Sidebar extends Component {
             key={subject.id}
           />
         )}
-        {load && <CircularProgress style={progressStyle} />}
+        {load && <CircularProgress style={styles.progress} />}
         <Divider />
         <RaisedButton
           label='+ Create Subject'
-          style={buttonStyle}
+          style={styles.button}
           fullWidth={true}
           onClick={this.openDialog}
           primary={true}

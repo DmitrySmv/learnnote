@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import RaisedButton from 'material-ui/RaisedButton';
+import { RaisedButton, CircularProgress } from 'material-ui';
 import { openCreateDeckDialog, closeCreateDeckDialog } from '../../redux/reducers/dialogs';
 import { deleteDeck, createDeck } from '../../redux/reducers/decks';
-import CreateDeckDialog from '../../components/CreateDeckDialog/CreateDeckDialog';
 import { LOADING } from '../../redux/statuses';
-import CircularProgress from 'material-ui/CircularProgress';
-import Deck from '../../components/Deck/Deck';
-import Grid from '../../components/Grid/Grid';
+import Deck from '../../components/Deck';
+import Grid from '../../components/Grid';
+import CreateDeckDialog from '../../components/CreateDeckDialog';
 
 const buttonStyle = {
   marginTop: 26
